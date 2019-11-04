@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ElasticSearch基础练习 | LGZ</title>
+    <meta name="description" content="落魄后端,在线炒粉">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d30c544a.css" as="style"><link rel="preload" href="/assets/js/app.b207c50f.js" as="script"><link rel="preload" href="/assets/js/3.0772832a.js" as="script"><link rel="preload" href="/assets/js/19.a12869f5.js" as="script"><link rel="prefetch" href="/assets/js/1.82ff88c9.js"><link rel="prefetch" href="/assets/js/10.b68dbdee.js"><link rel="prefetch" href="/assets/js/11.71deef42.js"><link rel="prefetch" href="/assets/js/12.bdea2b77.js"><link rel="prefetch" href="/assets/js/13.6e22270c.js"><link rel="prefetch" href="/assets/js/14.e6b10163.js"><link rel="prefetch" href="/assets/js/15.65bb6088.js"><link rel="prefetch" href="/assets/js/16.8aa9c66d.js"><link rel="prefetch" href="/assets/js/17.74e1cf4b.js"><link rel="prefetch" href="/assets/js/18.409fab5b.js"><link rel="prefetch" href="/assets/js/20.6a00bc44.js"><link rel="prefetch" href="/assets/js/21.d624464c.js"><link rel="prefetch" href="/assets/js/22.42f25c0b.js"><link rel="prefetch" href="/assets/js/23.714a054c.js"><link rel="prefetch" href="/assets/js/24.1ae687a7.js"><link rel="prefetch" href="/assets/js/25.5aedf653.js"><link rel="prefetch" href="/assets/js/26.8a0740a6.js"><link rel="prefetch" href="/assets/js/27.00f434df.js"><link rel="prefetch" href="/assets/js/28.12b76410.js"><link rel="prefetch" href="/assets/js/29.9d3b4ca3.js"><link rel="prefetch" href="/assets/js/30.1820424d.js"><link rel="prefetch" href="/assets/js/31.54a6bffd.js"><link rel="prefetch" href="/assets/js/32.31c8efc4.js"><link rel="prefetch" href="/assets/js/33.10385ef8.js"><link rel="prefetch" href="/assets/js/34.f27dee2e.js"><link rel="prefetch" href="/assets/js/35.a9cb67af.js"><link rel="prefetch" href="/assets/js/36.9f752de5.js"><link rel="prefetch" href="/assets/js/37.8308ed01.js"><link rel="prefetch" href="/assets/js/38.40a5eab3.js"><link rel="prefetch" href="/assets/js/39.3ec6c34e.js"><link rel="prefetch" href="/assets/js/4.5509e90c.js"><link rel="prefetch" href="/assets/js/40.43ea9f93.js"><link rel="prefetch" href="/assets/js/41.53add7c5.js"><link rel="prefetch" href="/assets/js/42.d780592a.js"><link rel="prefetch" href="/assets/js/43.95931812.js"><link rel="prefetch" href="/assets/js/44.25eae553.js"><link rel="prefetch" href="/assets/js/45.58267eb5.js"><link rel="prefetch" href="/assets/js/46.f601e62e.js"><link rel="prefetch" href="/assets/js/47.bcc5b42d.js"><link rel="prefetch" href="/assets/js/48.edd522c3.js"><link rel="prefetch" href="/assets/js/49.2ab49069.js"><link rel="prefetch" href="/assets/js/5.13703bcb.js"><link rel="prefetch" href="/assets/js/50.f70840f2.js"><link rel="prefetch" href="/assets/js/51.2ac3e203.js"><link rel="prefetch" href="/assets/js/52.4af3ff81.js"><link rel="prefetch" href="/assets/js/53.d9940b59.js"><link rel="prefetch" href="/assets/js/54.0e816113.js"><link rel="prefetch" href="/assets/js/55.f2b6bb88.js"><link rel="prefetch" href="/assets/js/56.e848599b.js"><link rel="prefetch" href="/assets/js/57.5f83aa72.js"><link rel="prefetch" href="/assets/js/58.f06f7f87.js"><link rel="prefetch" href="/assets/js/59.647ca050.js"><link rel="prefetch" href="/assets/js/6.4eccc923.js"><link rel="prefetch" href="/assets/js/60.c0cdfc9f.js"><link rel="prefetch" href="/assets/js/61.9db474d6.js"><link rel="prefetch" href="/assets/js/7.abea6dde.js"><link rel="prefetch" href="/assets/js/8.e3fabf99.js"><link rel="prefetch" href="/assets/js/9.9d1d4300.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d30c544a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LGZ</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><p>记录<code>ElasticSearch</code>基础<code>CRUD</code>操作
+</p> <h2 id="参数格式都是6-x的格式-实例是在7-x版本下完成的-所以实例格式与参数格式有所差异"><a href="#参数格式都是6-x的格式-实例是在7-x版本下完成的-所以实例格式与参数格式有所差异" class="header-anchor">#</a> 参数格式都是6.x的格式,实例是在7.x版本下完成的,所以实例格式与参数格式有所差异</h2> <p>基于<code>lasticSearch 7.0</code>版本的<code>CRUD</code>操作</p> <h5 id="_1-建立索引库"><a href="#_1-建立索引库" class="header-anchor">#</a> 1. 建立索引库</h5> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 建立索引库
+PUT /user
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h6 id="_1-1-建立索引库并设置副本和分片"><a href="#_1-1-建立索引库并设置副本和分片" class="header-anchor">#</a> 1.1 建立索引库并设置副本和分片</h6> <ul><li><p>Ps: <strong>7.x</strong>版本副本和分片默认为: 1</p></li> <li><p>参数格式:</p></li></ul> <p>PUT /{索引库名称}</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 建立索引库并设置副本和分片
+PUT /user
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;settings&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;number_of_replicas&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;number_of_shards&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h6 id="_1-2-建立索引库并设置mapping"><a href="#_1-2-建立索引库并设置mapping" class="header-anchor">#</a> 1.2 # 建立索引库并设置<code>mapping</code></h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>PUT /user
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;settings&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;number_of_replicas&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;number_of_shards&quot;</span><span class="token operator">:</span> <span class="token number">4</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;mappings&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;properties&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;userId&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;keyword&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;keyword&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;age&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;keyword&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;keyword&quot;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h5 id="_2-删除索引库"><a href="#_2-删除索引库" class="header-anchor">#</a> 2. 删除索引库</h5> <ul><li>参数格式:</li></ul> <p>DELETE /{索引库名称}</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 删除索引库
+DELETE /user
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h5 id="_3-添加文档"><a href="#_3-添加文档" class="header-anchor">#</a> 3. 添加文档</h5> <ul><li>参数格式:</li></ul> <p>PUT /{索引库}/{类型}/{索引id}</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 添加文档
+PUT /user/_doc/<span class="token number">1</span>
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;userId&quot;</span><span class="token operator">:</span><span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;I kittle&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;memo&quot;</span><span class="token operator">:</span><span class="token string">&quot;xiao mi&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h5 id="_4-检索文档"><a href="#_4-检索文档" class="header-anchor">#</a> 4. 检索文档</h5> <ul><li>参数格式:</li></ul> <p>GET /{索引库}/{类型}/{索引id}</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 获取文档
+GET /user/_doc/<span class="token number">1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h5 id="_5-检索文档-排序"><a href="#_5-检索文档-排序" class="header-anchor">#</a> 5. 检索文档:排序</h5> <ul><li>参数格式</li></ul> <p>GET /{索引库}/{类型}/_search
+{
+&quot;sort&quot;:[
+{&quot;age&quot;:&quot;asc&quot;}
+]
+}</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 搜索文档<span class="token operator">:</span>排序
+GET /user/_doc/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;sort&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token property">&quot;age&quot;</span><span class="token operator">:</span><span class="token string">&quot;asc&quot;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h5 id="_6-检索查询"><a href="#_6-检索查询" class="header-anchor">#</a> 6.检索查询</h5> <ul><li>参数格式:</li></ul> <p>GET /user/_doc/_search
+{
+&quot;query&quot;:{
+   	{检索方式}:{field:value}
+   }
+}</p> <ul><li>检索方式:</li></ul> <blockquote><p>term表示精确匹配,value值不会被分词器拆分,按照倒排索引匹配,一般用于filter中
+match_phrase表示短语检索,value值不会被分词器拆分,直接去倒排索引中匹配
+match表示全文检索,value值会被分词器拆分,然后去倒排索引中匹配
+range表示范围检索,有 gt/gte/lt/lte 等</p></blockquote> <h6 id="_6-1-查询名称为-wang-da-的员工"><a href="#_6-1-查询名称为-wang-da-的员工" class="header-anchor">#</a> 6.1 查询名称为'wang da'的员工</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 查询名称为'wang da'的员工
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">&quot;term&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;wang&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h6 id="_6-2-使用match查询-wang-员工"><a href="#_6-2-使用match查询-wang-员工" class="header-anchor">#</a> 6.2 使用match查询'wang'员工</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 使用match查询'wang'员工
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">&quot;term&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;wang&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h6 id="_6-3-查询出28到30岁的员工"><a href="#_6-3-查询出28到30岁的员工" class="header-anchor">#</a> 6.3 查询出28到30岁的员工</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 查询出<span class="token number">28</span>到<span class="token number">30</span>岁的员工
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;range&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;age&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;gte&quot;</span><span class="token operator">:</span> <span class="token number">28</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;lte&quot;</span><span class="token operator">:</span> <span class="token number">30</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h5 id="_7-关键字查询"><a href="#_7-关键字查询" class="header-anchor">#</a> 7. 关键字查询</h5> <p>multi_match:表示在多个字段间做检索</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#关键字查询
+GET /emp/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;multi_match&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token string">&quot;am&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;memo&quot;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h5 id="_8-投影查询"><a href="#_8-投影查询" class="header-anchor">#</a> 8. 投影查询</h5> <p>类似MySQL的查询语句中select后面的字段一样</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 查询指定字段'_source'和'query'是同一级别的
+GET /user/_search
+<span class="token punctuation">{</span>
+    <span class="token property">&quot;_source&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;age&quot;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">,</span> <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;range&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;age&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;gte&quot;</span><span class="token operator">:</span> <span class="token number">28</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;lte&quot;</span><span class="token operator">:</span> <span class="token number">30</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h5 id="_9-高亮显示"><a href="#_9-高亮显示" class="header-anchor">#</a> 9. 高亮显示</h5> <div class="language-json line-numbers-mode"><pre class="language-json"><code># 'am'高亮显示<span class="token punctuation">,</span>高亮查询<span class="token operator">:</span>把检索出来的文档匹配的内容高亮显示<span class="token punctuation">,</span>需要配合检索使用<span class="token punctuation">,</span>把查询的内容高亮
+GET /emp/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;multi_match&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token string">&quot;am&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;memo&quot;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;_source&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;userId&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;memo&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;highlight&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;memo&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h5 id="_10-逻辑查询"><a href="#_10-逻辑查询" class="header-anchor">#</a> 10. 逻辑查询</h5> <p>逻辑查询规则: must/should/must_not,相当于 and/or/not</p> <ul><li>参数格式:</li></ul> <p><img src="/assets/img/pasted-56.11a71433.png" alt="filename already exists, renamed"></p> <h6 id="_10-1-检索部门为1-并且大于32岁的员工"><a href="#_10-1-检索部门为1-并且大于32岁的员工" class="header-anchor">#</a> 10.1 检索部门为1,并且大于32岁的员工</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>获取部门为<span class="token number">1</span><span class="token punctuation">,</span>并且大于<span class="token number">32</span>岁的员工
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;bool&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;must&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;term&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span><span class="token number">1</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;range&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;age&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token property">&quot;gt&quot;</span><span class="token operator">:</span> <span class="token number">32</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h6 id="_10-2-检索出部门1或者小于30岁的员工"><a href="#_10-2-检索出部门1或者小于30岁的员工" class="header-anchor">#</a> 10.2 检索出部门1或者小于30岁的员工.</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>检索出部门<span class="token number">1</span>或者小于<span class="token number">30</span>岁的员工.
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;sort&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;age&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;order&quot;</span><span class="token operator">:</span> <span class="token string">&quot;asc&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span><span class="token string">&quot;asc&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;bool&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;should&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;term&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span><span class="token number">1</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;range&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;age&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token property">&quot;gt&quot;</span><span class="token operator">:</span> <span class="token number">30</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h6 id="_10-3-获取部门不为1的员工"><a href="#_10-3-获取部门不为1的员工" class="header-anchor">#</a> 10.3 获取部门不为1的员工</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>获取部门不为<span class="token number">1</span>的员工
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;sort&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;order&quot;</span><span class="token operator">:</span> <span class="token string">&quot;asc&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;bool&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;must_not&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;term&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h5 id="_11-过滤查询"><a href="#_11-过滤查询" class="header-anchor">#</a> 11. 过滤查询</h5> <p>filter表示在查询中不涉及评分,并且有缓存,用于精确匹配,filter中的检索方式多为term</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code>GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;query&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;bool&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;filter&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;term&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;deptId&quot;</span><span class="token operator">:</span> <span class="token number">1</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;range&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;age&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+              <span class="token property">&quot;gt&quot;</span><span class="token operator">:</span><span class="token number">30</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h5 id="_12-分组查询"><a href="#_12-分组查询" class="header-anchor">#</a> 12. 分组查询</h5> <p>分组运算:avg/sum/min/max/value_count/stats(执行以上所有功能)</p> <h6 id="_12-1-统计各部门平均年龄"><a href="#_12-1-统计各部门平均年龄" class="header-anchor">#</a> 12.1 统计各部门平均年龄</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>统计各部门平均年龄
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;groupByDeptId&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;userAge&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;avg&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;age&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h6 id="_12-2-统计各部门的人数"><a href="#_12-2-统计各部门的人数" class="header-anchor">#</a> 12.2 统计各部门的人数</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>统计各部门的人数
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;groupByDeptId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;totalCount&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;value_count&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h6 id="_12-3-统计每个部门最大年龄"><a href="#_12-3-统计每个部门最大年龄" class="header-anchor">#</a> 12.3 统计每个部门最大年龄</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>统计每个部门最大年龄
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;groupByDeptId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;maxAge&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;max&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;age&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h6 id="_12-4-统计每个部门最小年龄"><a href="#_12-4-统计每个部门最小年龄" class="header-anchor">#</a> 12.4 统计每个部门最小年龄</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>统计每个部门最小年龄
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;groupBydeptId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;minAge&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;min&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;age&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h6 id="_12-5-统计所有员工年龄总和"><a href="#_12-5-统计所有员工年龄总和" class="header-anchor">#</a> 12.5 统计所有员工年龄总和</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>统计所有员工年龄总和
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;sumAge&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;sum&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;age&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h6 id="_12-6-使用state函数"><a href="#_12-6-使用state函数" class="header-anchor">#</a> 12.6 使用state函数</h6> <div class="language-json line-numbers-mode"><pre class="language-json"><code>#需求<span class="token operator">:</span>使用state函数
+GET /user/_search
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;groupByDeptId&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;terms&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;deptId&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;aggs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;stateUse&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">&quot;stats&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;field&quot;</span><span class="token operator">:</span> <span class="token string">&quot;age&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><div class="my-loader center" style="display:none;" data-v-16b71b14><div class="my-loader-circle" data-v-16b71b14></div></div></div></div>
+    <script src="/assets/js/app.b207c50f.js" defer></script><script src="/assets/js/3.0772832a.js" defer></script><script src="/assets/js/19.a12869f5.js" defer></script>
+  </body>
+</html>

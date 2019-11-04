@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>设计模式之动态代理模式 | LGZ</title>
+    <meta name="description" content="落魄后端,在线炒粉">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d30c544a.css" as="style"><link rel="preload" href="/assets/js/app.b207c50f.js" as="script"><link rel="preload" href="/assets/js/3.0772832a.js" as="script"><link rel="preload" href="/assets/js/27.00f434df.js" as="script"><link rel="prefetch" href="/assets/js/1.82ff88c9.js"><link rel="prefetch" href="/assets/js/10.b68dbdee.js"><link rel="prefetch" href="/assets/js/11.71deef42.js"><link rel="prefetch" href="/assets/js/12.bdea2b77.js"><link rel="prefetch" href="/assets/js/13.6e22270c.js"><link rel="prefetch" href="/assets/js/14.e6b10163.js"><link rel="prefetch" href="/assets/js/15.65bb6088.js"><link rel="prefetch" href="/assets/js/16.8aa9c66d.js"><link rel="prefetch" href="/assets/js/17.74e1cf4b.js"><link rel="prefetch" href="/assets/js/18.409fab5b.js"><link rel="prefetch" href="/assets/js/19.a12869f5.js"><link rel="prefetch" href="/assets/js/20.6a00bc44.js"><link rel="prefetch" href="/assets/js/21.d624464c.js"><link rel="prefetch" href="/assets/js/22.42f25c0b.js"><link rel="prefetch" href="/assets/js/23.714a054c.js"><link rel="prefetch" href="/assets/js/24.1ae687a7.js"><link rel="prefetch" href="/assets/js/25.5aedf653.js"><link rel="prefetch" href="/assets/js/26.8a0740a6.js"><link rel="prefetch" href="/assets/js/28.12b76410.js"><link rel="prefetch" href="/assets/js/29.9d3b4ca3.js"><link rel="prefetch" href="/assets/js/30.1820424d.js"><link rel="prefetch" href="/assets/js/31.54a6bffd.js"><link rel="prefetch" href="/assets/js/32.31c8efc4.js"><link rel="prefetch" href="/assets/js/33.10385ef8.js"><link rel="prefetch" href="/assets/js/34.f27dee2e.js"><link rel="prefetch" href="/assets/js/35.a9cb67af.js"><link rel="prefetch" href="/assets/js/36.9f752de5.js"><link rel="prefetch" href="/assets/js/37.8308ed01.js"><link rel="prefetch" href="/assets/js/38.40a5eab3.js"><link rel="prefetch" href="/assets/js/39.3ec6c34e.js"><link rel="prefetch" href="/assets/js/4.5509e90c.js"><link rel="prefetch" href="/assets/js/40.43ea9f93.js"><link rel="prefetch" href="/assets/js/41.53add7c5.js"><link rel="prefetch" href="/assets/js/42.d780592a.js"><link rel="prefetch" href="/assets/js/43.95931812.js"><link rel="prefetch" href="/assets/js/44.25eae553.js"><link rel="prefetch" href="/assets/js/45.58267eb5.js"><link rel="prefetch" href="/assets/js/46.f601e62e.js"><link rel="prefetch" href="/assets/js/47.bcc5b42d.js"><link rel="prefetch" href="/assets/js/48.edd522c3.js"><link rel="prefetch" href="/assets/js/49.2ab49069.js"><link rel="prefetch" href="/assets/js/5.13703bcb.js"><link rel="prefetch" href="/assets/js/50.f70840f2.js"><link rel="prefetch" href="/assets/js/51.2ac3e203.js"><link rel="prefetch" href="/assets/js/52.4af3ff81.js"><link rel="prefetch" href="/assets/js/53.d9940b59.js"><link rel="prefetch" href="/assets/js/54.0e816113.js"><link rel="prefetch" href="/assets/js/55.f2b6bb88.js"><link rel="prefetch" href="/assets/js/56.e848599b.js"><link rel="prefetch" href="/assets/js/57.5f83aa72.js"><link rel="prefetch" href="/assets/js/58.f06f7f87.js"><link rel="prefetch" href="/assets/js/59.647ca050.js"><link rel="prefetch" href="/assets/js/6.4eccc923.js"><link rel="prefetch" href="/assets/js/60.c0cdfc9f.js"><link rel="prefetch" href="/assets/js/61.9db474d6.js"><link rel="prefetch" href="/assets/js/7.abea6dde.js"><link rel="prefetch" href="/assets/js/8.e3fabf99.js"><link rel="prefetch" href="/assets/js/9.9d1d4300.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d30c544a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LGZ</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><p>动态代理类是在程序运行期间由 JVM 通过反射等机制动态的生成的，所以不存在代理类的字节码文件，代理对象和真实对象的关系是在程序运行时期才确定的。
+</p> <blockquote><p>动态代理类是在程序运行期间由 JVM 通过反射等机制动态的生成的，所以不存在代理类的字节码文件，代理对象和真实对象的关系是在程序运行时期才确定的。</p></blockquote> <ul><li>如何动态的创建一份字节码：</li></ul> <p>由于 <code>JVM</code> 通过字节码的二进制信息加载类的，如果我们在运行期系统中，遵循 <code>Java</code> 编译系统组织 <code>.class</code> 文件的格式和结构，生成相应的二进制数据，然后再把这个二进制数据加载转换成对应的类。如此，就完成了在代码中动态创建一个类的能力了。</p> <h5 id="相关资料"><a href="#相关资料" class="header-anchor">#</a> 相关资料</h5> <ul><li>InvocationHandler 类</li></ul> <blockquote><p>InvocationHandler是由代理实例的调用处理程序实现的接口 。
+每个代理实例都有一个关联的调用处理程序。 当在代理实例上调用方法时，方法调用将被编码并分派到其调用处理程序的invoke方法。</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>主要方法：public Object invoke(Object proxy, Method method, Object[] args)
+	方法职责：负责集中处理动态代理类上的所有方法调用
+	参数：
+		proxy ：生成的代理对象    
+   		method：当前调用的真实方法对象    
+   		args ：当前调用方法的实参
+	返回：真实方法的返回结果
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><ul><li>Proxy 类</li></ul> <blockquote><p>Proxy提供了创建动态代理类和实例的静态方法，它也是由这些方法创建的所有动态代理类的超类。</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>主要方法：public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces,InvocationHandler hanlder)
+	方法职责：为指定类加载器、一组接口及调用处理器生成动态代理类实例 
+	参数:   
+   		loader ：类加载器，一般传递真实对象的类加载器   
+   		interfaces：代理类需要实现的接口  
+   		hanlder：代理对象如何做增强:
+	返回：创建的代理对象
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><table><thead><tr><th>静态方法</th></tr></thead> <tbody><tr><td>static Object</td></tr></tbody></table> <h5 id="实现动态代理方式"><a href="#实现动态代理方式" class="header-anchor">#</a> 实现动态代理方式</h5> <ul><li>[x] 针对有接口：使用 JDK 动态代理；</li> <li>[ ] 针对无接口：使用 CGLIB 或 Javassist 组件。
+若使用 JDK 动态代理生成代理类,真实类必须实现一个接口</li></ul> <h5 id="代码实现-jdk动态代理"><a href="#代码实现-jdk动态代理" class="header-anchor">#</a> 代码实现(JDK动态代理)</h5> <ul><li>代理接口</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 9:42
+ * @Version 3.0
+ * @description 代理接口
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">EmployeeService</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 签订合同
+     * @param name 姓名
+     * @param contract 合同
+     */</span>
+    <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> contract<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><ul><li>真实对象</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 10:31
+ * @Version 3.0
+ * @description 真实对象
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">EmployeeService</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 签订合同
+     *
+     * @param name     姓名
+     * @param contract 合同
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> contract<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;我是真实对象,与&quot;</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">&quot;签订了&quot;</span> <span class="token operator">+</span> contract<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ul><li>事务</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 11:17
+ * @Version 3.0
+ * @description 事务
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyTransactionManger</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;开启事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span>  <span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;回滚事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;提交事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li>处理器</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/11 16:45
+ * @Version 3.0
+ * @description
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TransactionManagerHandler</span> <span class="token keyword">implements</span> <span class="token class-name">InvocationHandler</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// 真实对象</span>
+    <span class="token keyword">private</span> <span class="token class-name">Object</span> target<span class="token punctuation">;</span>
+
+    <span class="token comment">// 事务对象</span>
+    <span class="token keyword">private</span> <span class="token class-name">MyTransactionManger</span> tx<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setTarget</span><span class="token punctuation">(</span><span class="token class-name">Object</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>target <span class="token operator">=</span> target<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setMyTransactionManger</span><span class="token punctuation">(</span><span class="token class-name">MyTransactionManger</span> tx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>tx <span class="token operator">=</span> tx<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 获取代理对象</span>
+    <span class="token keyword">public</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">T</span> <span class="token function">getProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">T</span><span class="token punctuation">)</span> <span class="token class-name">Proxy</span><span class="token punctuation">.</span><span class="token function">newProxyInstance</span><span class="token punctuation">(</span>
+                target<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                target<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInterfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">Object</span> proxy<span class="token punctuation">,</span> <span class="token class-name">Method</span> method<span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Throwable</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Object</span> result <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        tx<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tx<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tx<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br></div></div><ul><li>测试</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/11 16:58
+ * @Version 3.0
+ * @description
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">MyTransactionManger</span> tx <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyTransactionManger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">EmployeeService</span> employeeService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EmployeeServiceImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">TransactionManagerHandler</span> handler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TransactionManagerHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        handler<span class="token punctuation">.</span><span class="token function">setMyTransactionManger</span><span class="token punctuation">(</span>tx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        handler<span class="token punctuation">.</span><span class="token function">setTarget</span><span class="token punctuation">(</span>employeeService<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;真实类:&quot;</span> <span class="token operator">+</span> employeeService<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">EmployeeService</span> proxy <span class="token operator">=</span> handler<span class="token punctuation">.</span><span class="token function">getProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;代理类:&quot;</span> <span class="token operator">+</span> proxy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        proxy<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token string">&quot;张三&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;10年长期合同&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><ul><li>结果</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>开启事务
+我是真实对象,与张三签订了10年长期合同
+提交事务
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h5 id="调用流程"><a href="#调用流程" class="header-anchor">#</a> 调用流程</h5> <p><img src="/assets/img/pasted-23.b44f64a5.png" alt="filename already exists, renamed"></p> <h5 id="jdk动态代理总结"><a href="#jdk动态代理总结" class="header-anchor">#</a> JDK动态代理总结</h5> <ul><li>Java 动态代理是使用 java.lang.reflect 包中的 Proxy 类与 InvocationHandler 接口这两个来完成的。</li> <li>要使用 JDK 动态代理，委托类必须实现接口。</li> <li>JDK 动态代理将会拦截所有 pubic 的方法（因为只能调用接口中定义的方法），这样即使在接口中增加了新的方法，不用修改代码也会被拦截。</li> <li>动态代理的最小单位是类（类中某些方法都会被处理），如果只想拦截一部分方法，可以在 invoke 方法中对要执行的方法名进行判断。</li> <li>对接口创建代理优于对类创建代理，因为会产生更加松耦合的系统，也更符合面向接口编程规范。
+若委托类实现了接口，优先选用 JDK 动态代理。
+若委托类没有实现任何接口，使用 Javassit 和 CGLIB 动态代理。</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><div class="my-loader center" style="display:none;" data-v-16b71b14><div class="my-loader-circle" data-v-16b71b14></div></div></div></div>
+    <script src="/assets/js/app.b207c50f.js" defer></script><script src="/assets/js/3.0772832a.js" defer></script><script src="/assets/js/27.00f434df.js" defer></script>
+  </body>
+</html>

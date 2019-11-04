@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux相关命令 | LGZ</title>
+    <meta name="description" content="落魄后端,在线炒粉">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d30c544a.css" as="style"><link rel="preload" href="/assets/js/app.b207c50f.js" as="script"><link rel="preload" href="/assets/js/3.0772832a.js" as="script"><link rel="preload" href="/assets/js/37.8308ed01.js" as="script"><link rel="prefetch" href="/assets/js/1.82ff88c9.js"><link rel="prefetch" href="/assets/js/10.b68dbdee.js"><link rel="prefetch" href="/assets/js/11.71deef42.js"><link rel="prefetch" href="/assets/js/12.bdea2b77.js"><link rel="prefetch" href="/assets/js/13.6e22270c.js"><link rel="prefetch" href="/assets/js/14.e6b10163.js"><link rel="prefetch" href="/assets/js/15.65bb6088.js"><link rel="prefetch" href="/assets/js/16.8aa9c66d.js"><link rel="prefetch" href="/assets/js/17.74e1cf4b.js"><link rel="prefetch" href="/assets/js/18.409fab5b.js"><link rel="prefetch" href="/assets/js/19.a12869f5.js"><link rel="prefetch" href="/assets/js/20.6a00bc44.js"><link rel="prefetch" href="/assets/js/21.d624464c.js"><link rel="prefetch" href="/assets/js/22.42f25c0b.js"><link rel="prefetch" href="/assets/js/23.714a054c.js"><link rel="prefetch" href="/assets/js/24.1ae687a7.js"><link rel="prefetch" href="/assets/js/25.5aedf653.js"><link rel="prefetch" href="/assets/js/26.8a0740a6.js"><link rel="prefetch" href="/assets/js/27.00f434df.js"><link rel="prefetch" href="/assets/js/28.12b76410.js"><link rel="prefetch" href="/assets/js/29.9d3b4ca3.js"><link rel="prefetch" href="/assets/js/30.1820424d.js"><link rel="prefetch" href="/assets/js/31.54a6bffd.js"><link rel="prefetch" href="/assets/js/32.31c8efc4.js"><link rel="prefetch" href="/assets/js/33.10385ef8.js"><link rel="prefetch" href="/assets/js/34.f27dee2e.js"><link rel="prefetch" href="/assets/js/35.a9cb67af.js"><link rel="prefetch" href="/assets/js/36.9f752de5.js"><link rel="prefetch" href="/assets/js/38.40a5eab3.js"><link rel="prefetch" href="/assets/js/39.3ec6c34e.js"><link rel="prefetch" href="/assets/js/4.5509e90c.js"><link rel="prefetch" href="/assets/js/40.43ea9f93.js"><link rel="prefetch" href="/assets/js/41.53add7c5.js"><link rel="prefetch" href="/assets/js/42.d780592a.js"><link rel="prefetch" href="/assets/js/43.95931812.js"><link rel="prefetch" href="/assets/js/44.25eae553.js"><link rel="prefetch" href="/assets/js/45.58267eb5.js"><link rel="prefetch" href="/assets/js/46.f601e62e.js"><link rel="prefetch" href="/assets/js/47.bcc5b42d.js"><link rel="prefetch" href="/assets/js/48.edd522c3.js"><link rel="prefetch" href="/assets/js/49.2ab49069.js"><link rel="prefetch" href="/assets/js/5.13703bcb.js"><link rel="prefetch" href="/assets/js/50.f70840f2.js"><link rel="prefetch" href="/assets/js/51.2ac3e203.js"><link rel="prefetch" href="/assets/js/52.4af3ff81.js"><link rel="prefetch" href="/assets/js/53.d9940b59.js"><link rel="prefetch" href="/assets/js/54.0e816113.js"><link rel="prefetch" href="/assets/js/55.f2b6bb88.js"><link rel="prefetch" href="/assets/js/56.e848599b.js"><link rel="prefetch" href="/assets/js/57.5f83aa72.js"><link rel="prefetch" href="/assets/js/58.f06f7f87.js"><link rel="prefetch" href="/assets/js/59.647ca050.js"><link rel="prefetch" href="/assets/js/6.4eccc923.js"><link rel="prefetch" href="/assets/js/60.c0cdfc9f.js"><link rel="prefetch" href="/assets/js/61.9db474d6.js"><link rel="prefetch" href="/assets/js/7.abea6dde.js"><link rel="prefetch" href="/assets/js/8.e3fabf99.js"><link rel="prefetch" href="/assets/js/9.9d1d4300.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d30c544a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LGZ</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><ul><li>如题
+记录不常用的命令
+</li></ul> <h6 id="运行java项目"><a href="#运行java项目" class="header-anchor">#</a> 运行<code>java</code>项目</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>nohup java -jar -Xms10m -Xmx200m ylcloud-item-service-0.0.1-SNAPSHOT.jar &gt; /pro/test/home/yanfa/nohup_item.out &amp; 2&gt;&amp;1 &amp;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>nohup: 后台启动项目</p> <p>-Xms10m -Xmx200m: jvm虚拟机参数</p> <h6 id="查看某端口占用的线程的pid"><a href="#查看某端口占用的线程的pid" class="header-anchor">#</a> 查看某端口占用的线程的<code>pid</code></h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>netstat -nlp |grep :4000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h6 id="查看pid占用的端口号"><a href="#查看pid占用的端口号" class="header-anchor">#</a> 查看<code>pid</code>占用的端口号</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>netstat -nap | grep 32716
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h5 id="二-防火墙"><a href="#二-防火墙" class="header-anchor">#</a> 二. 防火墙</h5> <h6 id="_2-1-查看所有打开的端口"><a href="#_2-1-查看所有打开的端口" class="header-anchor">#</a> 2.1 查看所有打开的端口</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>firewall-cmd --zone=public --list-ports
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h6 id="_2-2-开启端口（-permanent参数为永久生效，不加则重启后失效）"><a href="#_2-2-开启端口（-permanent参数为永久生效，不加则重启后失效）" class="header-anchor">#</a> 2.2 开启端口（--permanent参数为永久生效，不加则重启后失效）</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>firewall-cmd --zone=public --add-port=端口号/tcp --permanent
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h6 id="_2-3-更新防火墙规则："><a href="#_2-3-更新防火墙规则：" class="header-anchor">#</a> 2.3 更新防火墙规则：</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>firewall-cmd --reload
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h6 id="_2-4-查看防火墙状态"><a href="#_2-4-查看防火墙状态" class="header-anchor">#</a> 2.4 查看防火墙状态</h6> <div class="language- line-numbers-mode"><pre class="language-text"><code>firewall-cmd --state
+
+###### 查看安装目录
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>which git</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>##### 查看文件大小
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>du -sh *</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+##### 重启``nginx``
+- 在``sbin``目录下执行命令
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>./nginx -s reload</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>##### 查找文件
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>find / -name ${fileName}</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>##### VI操作
+
+VI操作:
+
+用的是键盘的左边的数字键
+
+逐字符移动: 
+行内跳转:
+右边的数字键0:跳转到行首(编辑模式)
+$(Shift+4): 跳转到行尾(编辑模式)
+^(Shift+6): 跳转到行首的第一个字母位置(编辑模式)
+
+行间跳转:(末行模式)
+gg: 跳转到文件第一行(编辑模式)
+G(Shift+g): 跳到文件的最后一行(编辑模式)
+
+
+直接输入行号就可以跳转到对应行
+注意:可以先把行号显示出来:set number
+
+在编辑模式下:
+ctrl+f 向下翻一页  forward
+ctrl+b 向上翻一页 backward
+
+dd: 删除光标所在行 (编辑模式)
+3dd:从光标行开始删除3行(编辑模式)
+------1,4d 删除第一行到第四行(末行模式)
+
+u 撤销上一个操作(编辑模式)
+
+
+yy 复制光标所在行 (编辑模式)
+2yy 从光标行开始复制2行(编辑模式)
+p: 粘贴命令
+
+末行模式:
+文件的查找
+/parttern 从前往后查找
+?parttern 从后往前查找
+n:  下一个匹配的字符串
+N: 上一个匹配的字符串
+
+g:全局替换
+i:忽略大小写
+%s/f/F/gi
+
+创建文件 
+vi 文件名
+touch 文件名
+
+创建目录
+mkdir 目录名
+mkdir -p 目录名1/目录名2 创建层级目录 可以是相对目录,也可以是绝对目录
+
+
+rm 文件名
+rm -f 文件名
+rm -fr 目录 删除目录必须使用 -r 递归删除
+
+
+拷贝: cp
+拷贝目录的话要带上参数-r
+移动: mv: mv</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><div class="my-loader center" style="display:none;" data-v-16b71b14><div class="my-loader-circle" data-v-16b71b14></div></div></div></div>
+    <script src="/assets/js/app.b207c50f.js" defer></script><script src="/assets/js/3.0772832a.js" defer></script><script src="/assets/js/37.8308ed01.js" defer></script>
+  </body>
+</html>

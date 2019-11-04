@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>设计模式之静态代理模式 | LGZ</title>
+    <meta name="description" content="落魄后端,在线炒粉">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d30c544a.css" as="style"><link rel="preload" href="/assets/js/app.b207c50f.js" as="script"><link rel="preload" href="/assets/js/3.0772832a.js" as="script"><link rel="preload" href="/assets/js/28.12b76410.js" as="script"><link rel="prefetch" href="/assets/js/1.82ff88c9.js"><link rel="prefetch" href="/assets/js/10.b68dbdee.js"><link rel="prefetch" href="/assets/js/11.71deef42.js"><link rel="prefetch" href="/assets/js/12.bdea2b77.js"><link rel="prefetch" href="/assets/js/13.6e22270c.js"><link rel="prefetch" href="/assets/js/14.e6b10163.js"><link rel="prefetch" href="/assets/js/15.65bb6088.js"><link rel="prefetch" href="/assets/js/16.8aa9c66d.js"><link rel="prefetch" href="/assets/js/17.74e1cf4b.js"><link rel="prefetch" href="/assets/js/18.409fab5b.js"><link rel="prefetch" href="/assets/js/19.a12869f5.js"><link rel="prefetch" href="/assets/js/20.6a00bc44.js"><link rel="prefetch" href="/assets/js/21.d624464c.js"><link rel="prefetch" href="/assets/js/22.42f25c0b.js"><link rel="prefetch" href="/assets/js/23.714a054c.js"><link rel="prefetch" href="/assets/js/24.1ae687a7.js"><link rel="prefetch" href="/assets/js/25.5aedf653.js"><link rel="prefetch" href="/assets/js/26.8a0740a6.js"><link rel="prefetch" href="/assets/js/27.00f434df.js"><link rel="prefetch" href="/assets/js/29.9d3b4ca3.js"><link rel="prefetch" href="/assets/js/30.1820424d.js"><link rel="prefetch" href="/assets/js/31.54a6bffd.js"><link rel="prefetch" href="/assets/js/32.31c8efc4.js"><link rel="prefetch" href="/assets/js/33.10385ef8.js"><link rel="prefetch" href="/assets/js/34.f27dee2e.js"><link rel="prefetch" href="/assets/js/35.a9cb67af.js"><link rel="prefetch" href="/assets/js/36.9f752de5.js"><link rel="prefetch" href="/assets/js/37.8308ed01.js"><link rel="prefetch" href="/assets/js/38.40a5eab3.js"><link rel="prefetch" href="/assets/js/39.3ec6c34e.js"><link rel="prefetch" href="/assets/js/4.5509e90c.js"><link rel="prefetch" href="/assets/js/40.43ea9f93.js"><link rel="prefetch" href="/assets/js/41.53add7c5.js"><link rel="prefetch" href="/assets/js/42.d780592a.js"><link rel="prefetch" href="/assets/js/43.95931812.js"><link rel="prefetch" href="/assets/js/44.25eae553.js"><link rel="prefetch" href="/assets/js/45.58267eb5.js"><link rel="prefetch" href="/assets/js/46.f601e62e.js"><link rel="prefetch" href="/assets/js/47.bcc5b42d.js"><link rel="prefetch" href="/assets/js/48.edd522c3.js"><link rel="prefetch" href="/assets/js/49.2ab49069.js"><link rel="prefetch" href="/assets/js/5.13703bcb.js"><link rel="prefetch" href="/assets/js/50.f70840f2.js"><link rel="prefetch" href="/assets/js/51.2ac3e203.js"><link rel="prefetch" href="/assets/js/52.4af3ff81.js"><link rel="prefetch" href="/assets/js/53.d9940b59.js"><link rel="prefetch" href="/assets/js/54.0e816113.js"><link rel="prefetch" href="/assets/js/55.f2b6bb88.js"><link rel="prefetch" href="/assets/js/56.e848599b.js"><link rel="prefetch" href="/assets/js/57.5f83aa72.js"><link rel="prefetch" href="/assets/js/58.f06f7f87.js"><link rel="prefetch" href="/assets/js/59.647ca050.js"><link rel="prefetch" href="/assets/js/6.4eccc923.js"><link rel="prefetch" href="/assets/js/60.c0cdfc9f.js"><link rel="prefetch" href="/assets/js/61.9db474d6.js"><link rel="prefetch" href="/assets/js/7.abea6dde.js"><link rel="prefetch" href="/assets/js/8.e3fabf99.js"><link rel="prefetch" href="/assets/js/9.9d1d4300.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d30c544a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LGZ</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/guide/" class="nav-link">归档</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><blockquote><p>客户端直接使用的都是代理对象，不知道真实对象是谁，此时代理对象可以在客户端和真实对象之间起到中介的作用。</p></blockquote> <p>1.1、代理对象完全包含真实对象，客户端使用的都是代理对象的方法，和真实对象没有直接关系；
+1.2、代理模式的职责：把不是真实对象该做的事情从真实对象上撇开——职责分离。
+</p> <h5 id="代理模式"><a href="#代理模式" class="header-anchor">#</a> 代理模式</h5> <blockquote><p>客户端直接使用的都是代理对象，不知道真实对象是谁，此时代理对象可以在客户端和真实对象之间起到中介的作用。</p></blockquote> <p>1.1、代理对象完全包含真实对象，客户端使用的都是代理对象的方法，和真实对象没有直接关系；
+1.2、代理模式的职责：把不是真实对象该做的事情从真实对象上撇开——职责分离。</p> <h5 id="_1-静态代理"><a href="#_1-静态代理" class="header-anchor">#</a> 1. 静态代理</h5> <p>在程序运行前就已经存在代理类的字节码文件,代理对象和真实对象的关系在运行前就确定了.
+<img src="/assets/img/pasted-22.c980feb1.png" alt="filename already exists, renamed"></p> <h5 id="_2-代码实现"><a href="#_2-代码实现" class="header-anchor">#</a> 2. 代码实现</h5> <ul><li>代理接口</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 9:42
+ * @Version 3.0
+ * @description 代理接口
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">EmployeeService</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 签订合同
+     * @param name 姓名
+     * @param contract 合同
+     */</span>
+    <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> contract<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><ul><li>真实对象</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 10:31
+ * @Version 3.0
+ * @description 真实对象
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">EmployeeService</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 签订合同
+     *
+     * @param name     姓名
+     * @param contract 合同
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> contract<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;我是真实对象,与&quot;</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">&quot;签订了&quot;</span> <span class="token operator">+</span> contract<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ul><li>代理对象</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 10:34
+ * @Version 3.0
+ * @description 代理对象
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeProxyImpl</span> <span class="token keyword">implements</span> <span class="token class-name">EmployeeService</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 真实对象
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">EmployeeService</span> target<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">MyTransactionManger</span> myTransactionManger<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setTarget</span><span class="token punctuation">(</span><span class="token class-name">EmployeeService</span> target<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>target <span class="token operator">=</span> target<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setMyTransactionManger</span><span class="token punctuation">(</span><span class="token class-name">MyTransactionManger</span> myTransactionManger<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>myTransactionManger <span class="token operator">=</span> myTransactionManger<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 签订合同
+     *
+     * @param name     姓名
+     * @param contract 合同
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> contract<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        myTransactionManger<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+
+            <span class="token comment">// 真实对象只负责签订合同</span>
+            target<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>contract<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// TODO 签订合同后处理一系列其他问题</span>
+
+            myTransactionManger<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            myTransactionManger<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><ul><li>事务</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 11:17
+ * @Version 3.0
+ * @description 事务
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyTransactionManger</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;开启事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span>  <span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;回滚事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;提交事务&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li>测试</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author LuGuoZheng
+ * @date 2019/5/9 11:01
+ * @Version 3.0
+ * @description 测试
+ *
+ *
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">EmployeeServiceImpl</span> employeeService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EmployeeServiceImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">EmployeeProxyImpl</span> employeeProxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EmployeeProxyImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">MyTransactionManger</span> myTransactionManger <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyTransactionManger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        employeeProxy<span class="token punctuation">.</span><span class="token function">setMyTransactionManger</span><span class="token punctuation">(</span>myTransactionManger<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        employeeProxy<span class="token punctuation">.</span><span class="token function">setTarget</span><span class="token punctuation">(</span>employeeService<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        employeeProxy<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token string">&quot; 张三 &quot;</span><span class="token punctuation">,</span><span class="token string">&quot;10长期合同~!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><ul><li>测试结果</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>开启事务
+我是真实对象,与 张三 签订了10长期合同~!
+提交事务
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h5 id="_3-静态代理优缺点"><a href="#_3-静态代理优缺点" class="header-anchor">#</a> 3. 静态代理优缺点</h5> <ul><li>优点
+业务只需要关注业务逻辑本身,保证了业务类的重要性.把真实对象隐藏起来,保护真实对象</li> <li>缺点
+代理对象的某个接口只服务于某一种类型的对象,也就是为每个真实类创建一个代理类.
+若需要代理的方法很多,那么就要为每一种方法都进行代理处理.
+若接口增加一个方法,除了所有实现类需要实现这个方法,代理类也需要实现此方法.</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"><div class="my-loader center" style="display:none;" data-v-16b71b14><div class="my-loader-circle" data-v-16b71b14></div></div></div></div>
+    <script src="/assets/js/app.b207c50f.js" defer></script><script src="/assets/js/3.0772832a.js" defer></script><script src="/assets/js/28.12b76410.js" defer></script>
+  </body>
+</html>
